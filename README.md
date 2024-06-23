@@ -3,11 +3,14 @@
 ### Download PIP3 Dependencies
 sudo apt-get install python-virtualenv
 python3 -m venv .distribuidos-venv
+source .distribuidos-venv/bin/activate
 pip3 install -r requirements.txt
 pip3 install pymongo
+pip3 install kafka-python
+pip3 install git+https://github.com/dpkp/kafka-python.git
 
 ### Start Prometheus (keep it running in a terminal)
-tar -xvzf prometheus.tar.gz
+tar -xvzf ./prometheus-2.53.0.linux-amd64.tar.gz
 cp prometheus.yml ./prometheus-2.53.0.linux-amd64
 cd ./prometheus-2.53.0.linux-amd64 && ./prometheus
 
@@ -24,7 +27,7 @@ brew services list
 mongosh < ./source/scripts/load_mongodb.js
 
 ### Enter Kafka's folder
-tar -xvzf kafka_2.12-3.5.0.tgz
+tar -xvzf ./kafka_2.12-3.5.0.tgz
 cd kafka_2.12-3.5.0
 
 ### Start Kafka Zookeeper (keep it running in a terminal)
