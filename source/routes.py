@@ -32,9 +32,12 @@ def post_prescription():
   new_prescription = {
     'id': new_prescription_id,
     'crm': req_payload['crm'],
-    'name_doctor': req_payload['name_doctor'],
+    'doctor_name': req_payload['doctor_name'],
     'patient_cpf': req_payload['patient_cpf'],
-    'description': req_payload['description']
+    'medication_register': req_payload['medication_register'],
+    'quantity': req_payload['quantity'],
+    'description': req_payload['description'],
+    'valid': req_payload['valid']
   }
 
   prescription_collection.insert_one(new_prescription)
@@ -50,7 +53,7 @@ def get_prescription(prescription_id):
 @app.route('/prescription/<prescription_id>/discard', methods=['POST'])
 def discard_prescription(prescription_id):
   prescription_collection.update_one({'id': prescription_id}, {'$set': {'valid': False}})
-  return send_result('Successfully updated', 200)
+  return make_response('Successfully updated', 200)
 
 @app.route('/stock/', methods=['POST'])
 def create_stock():
@@ -59,13 +62,8 @@ def create_stock():
   new_stock_id = str(uuid4())
   new_stock = {
     'id': new_stock_id,
-    'type': req_payload['type'],
-    'patient_cpf': req_payload['patient_cpf'],
-    'prescription_id': req_payload['prescription_id'],
-    'region_origin': req_payload['region_origin'],
-    'region_destiny': req_payload['region_destiny'],
-    'stock_base': req_payload['stock_base'],
-    'stock_destiny': req_payload['stock_destiny'],
+    'region': req_payload['region'],
+    'medication_register': req_payload['medication_register'],
     'quantity': req_payload['quantity']
   }
 

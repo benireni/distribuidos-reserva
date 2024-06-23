@@ -12,11 +12,11 @@ stock_collection = public_health_care_client["stock"]
 prescription_collection = public_health_care_client["prescription"]
 delivery_collection = public_health_care_client["delivery"]
 
-def get_stock_by_region_and_medication(region, register_medication):
-    return stock_collection.find_one({'region': region, 'register_medication': register_medication}, {})
+def get_stock_by_region_and_medication(region, medication_register):
+    return stock_collection.find_one({'region': region, 'medication_register': medication_register}, {})
 
-def get_stock_by_medication(register_medication):
-    return stock_collection.find_one({'register_medication': register_medication}, {})
+def get_stock_by_medication(medication_register):
+    return stock_collection.find_one({'medication_register': medication_register}, {})
 
 def discard_prescription(prescription_id):
     prescription_collection.update_one({'id': prescription_id}, {'$set': {'valid': False}})
@@ -54,9 +54,9 @@ def place_delivery_region(region_destiny, region_origin, base_stock_id, destiny_
 
 def handle_medication_request(medication_request):
     region_patient = medication_request['region']
-    register_medication = medication_request['register_medication']
+    medication_register = medication_request['medication_register']
 
-    stock = get_stock_by_region_and_medication(region_patient, register_medication)
+    stock = get_stock_by_region_and_medication(region_patient, medication_register)
 
     available_quantity = stock['quantity']
     needed_quantity = medication_request['quantity']
@@ -66,7 +66,7 @@ def handle_medication_request(medication_request):
             delivery_id = place_delivery_patient(medication_request['region'], medication_request['patient_cpf'], stock['id'], medication_request['prescription_id'], medication_request['quantity'])
             return 'Entrega separada! ID: {}'.format(delivery_id)
         
-    available_region = get_stock_by_medication(register_medication)
+    available_region = get_stock_by_medication(medication_register)
     if available_region:
         delivery_id = place_delivery_region(medication_request['region'], available_region['region'], stock['id'], available_region['id'], medication_request['quantity'])
         discard_prescription(medication_request['prescription_id'])
@@ -77,10 +77,10 @@ def handle_medication_request(medication_request):
 mocked_prescription = {
     'id': '982c38fe-2250-4c7c-926a-fa08f9970907',
     'crm': 123,
-    'name_doctor': 'medicao',
+    'doctor_name': 'medicao',
     'patient_cpf': '51410642549',
     'quantity': 90,
-    'register_medication': 'dff8e6f3-f485-43de-9d66-be8d356446ef',
+    'medication_register': 'dff8e6f3-f485-43de-9d66-be8d356446ef',
     'description': "prescription daorinha pra ficar legau",
     'valid': True
 }

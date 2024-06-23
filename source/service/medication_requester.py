@@ -31,7 +31,7 @@ def submit_medication_request(prescription_id):
     request = {
         'prescription_id': prescription['id'],
         'patient_cpf': prescription['patient_cpf'],
-        'register_medication': prescription['register_medication'],
+        'medication_register': prescription['medication_register'],
         'quantity': prescription['quantity'],
         'region': region
     }

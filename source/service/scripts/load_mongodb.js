@@ -14,7 +14,7 @@ let prescriptionPopulation = [
         crm: 123,
         doctor_name: "João",
         patient_cpf: patient1_base_cpf,
-        register_base_medication: '8de55a57-b54b-4409-b720-0607eece846d',
+        medication_register: '8de55a57-b54b-4409-b720-0607eece846d',
         quantity: 40,
         description: "prescription daorinha pra ficar legau",
         valid: true
@@ -52,13 +52,13 @@ let stockPopulation = [
     {
         id: '14a2e45f-43d2-47db-b0a7-f678083789c0',
         region: "Centro",
-        register_medication: '8de55a57-b54b-4409-b720-0607eece846d',
+        medication_register: '8de55a57-b54b-4409-b720-0607eece846d',
         quantity: 93
     },
     {
         id: 'a471c56f-b3ce-4af5-b9e6-9f39082b221b',
         region: "Jardim",
-        register_medication: 'c1ea1d42-6631-490b-b414-6c6ec7995167',
+        medication_register: 'c1ea1d42-6631-490b-b414-6c6ec7995167',
         quantity: 60
     }
 ];
@@ -84,7 +84,7 @@ let medicationPopulation = [
     }
 ];
   
-let devliveryPopulation = [
+let deliveryPopulation = [
     {
         id: crypto.randomUUID(),
         type: "PATIENT",
@@ -92,7 +92,7 @@ let devliveryPopulation = [
         prescription_id: '4ed3fab9-cb14-4c8f-89d6-5cdb3b7596d1',
         region_origin: 'jardim luft',
         region_destiny: null,
-        stock_base: stock_base_id,
+        stock_base: '14a2e45f-43d2-47db-b0a7-f678083789c0',
         stock_destiny: null,
         quantity: 40
     }
@@ -102,14 +102,14 @@ let prescriptionIndex = {id: 1};
 let patientIndex = {cpf: 1};
 let stockIndex = {id: 1};
 let medicationIndex = {register: 1};
-let devliveryIndex = {id: 1};
+let deliveryIndex = {id: 1};
 
 let collInfoObjs = [ 
     {coll: "prescription", data: prescriptionPopulation, index: prescriptionIndex}, 
     {coll: "patient", data: patientPopulation, index: patientIndex},
     {coll: "stock", data: stockPopulation, index: stockIndex},
     {coll: "medication", data: medicationPopulation, index: medicationIndex},
-    {coll: "devlivery", data: devliveryPopulation, index: devliveryIndex}
+    {coll: "delivery", data: deliveryPopulation, index: deliveryIndex}
 ];
 
 for (obj of collInfoObjs) {
