@@ -36,5 +36,8 @@ def submit_medication_request(prescription_id):
         'region': region
     }
 
+    print('request')
+    print(request)
+
     send_message(request)
     return request

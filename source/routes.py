@@ -55,6 +55,11 @@ def discard_prescription(prescription_id):
   prescription_collection.update_one({'id': prescription_id}, {'$set': {'valid': False}})
   return make_response('Successfully updated', 200)
 
+@app.route('/delivery/<delivery_id>/conclude', methods=['POST'])
+def conclude_delivery(delivery_id):
+  stock_updater.submit_delivery(delivery_id)
+  return make_response('Successfully concluded', 200)
+
 @app.route('/stock/', methods=['POST'])
 def create_stock():
   req_payload = request.get_json()

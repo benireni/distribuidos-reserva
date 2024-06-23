@@ -24,7 +24,7 @@ sudo brew services start mongodb/brew/mongodb-community@6.0
 brew services list
 
 ### Load up MongoDB
-mongosh < ./source/scripts/load_mongodb.js
+mongosh < ./source/service/scripts/load_mongodb.js
 
 ### Enter Kafka's folder
 tar -xvzf ./kafka_2.12-3.5.0.tgz
@@ -33,8 +33,14 @@ cd kafka_2.12-3.5.0
 ### Start Kafka Zookeeper (keep it running in a terminal)
 ./bin/zookeeper-server-start.sh config/zookeeper.properties
 
-### Start Kafka Broker (keep it running in another terminal)
+### Start Kafka Broker (keep it running in a second terminal)
 ./bin/kafka-server-start.sh config/server.properties
 
 ### Create our topic (run this in a third terminal)
 ./bin/kafka-topics.sh --create --topic medication-request --bootstrap-server localhost:9092
+
+### Start Router (run this in a fourth terminal)
+python3 ./source/routes.py
+
+### Start Kafka Consumer (run this in a fifth terminal)
+python3 ./source/service/delivery_handler.py
