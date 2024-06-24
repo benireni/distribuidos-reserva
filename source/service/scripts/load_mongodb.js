@@ -24,7 +24,7 @@ let prescriptionPopulation = [
         crm: 321,
         doctor_name: "Maria",
         patient_cpf: patient2_base_cpf,
-        register_base_medication: 'c1ea1d42-6631-490b-b414-6c6ec7995167',
+        medication_register: 'c1ea1d42-6631-490b-b414-6c6ec7995167',
         quantity: 60,
         description: "prescription bacaninha pra ficar legau",
         valid: true
@@ -44,7 +44,7 @@ let patientPopulation = [
         name: "Joana Marta",
         data_nascimento: "10/08/1990",
         convenio: "Conveniwow",
-        region: "Centro"
+        region: "Jardim"
     }
 ];
   
@@ -53,13 +53,19 @@ let stockPopulation = [
         id: '14a2e45f-43d2-47db-b0a7-f678083789c0',
         region: "Centro",
         medication_register: '8de55a57-b54b-4409-b720-0607eece846d',
-        quantity: 93
+        quantity: 100
     },
     {
         id: 'a471c56f-b3ce-4af5-b9e6-9f39082b221b',
         region: "Jardim",
         medication_register: 'c1ea1d42-6631-490b-b414-6c6ec7995167',
-        quantity: 60
+        quantity: 40
+    },
+    {
+        id: 'ddddd56f-b3ce-4af5-b9e6-9f39082b221b',
+        region: "Botafogo",
+        medication_register: 'c1ea1d42-6631-490b-b414-6c6ec7995167',
+        quantity: 30
     }
 ];
   

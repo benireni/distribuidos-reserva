@@ -78,13 +78,14 @@ def handle_medication_request(medication_request):
             delivery_id = place_delivery_patient(medication_request['region'], medication_request['patient_cpf'], stock['id'], medication_request['prescription_id'], medication_request['quantity'])
             return 'Entrega separada! ID: {}'.format(delivery_id)
         
-    available_region = get_stock_by_medication(medication_register, region_patient)
-    if available_region:
-        delivery_id = place_delivery_region(medication_request['region'], available_region['region'], stock['id'], available_region['id'], medication_request['quantity'])
-        discard_prescription(medication_request['prescription_id'])
-        return 'Remedio indisponível, tente novamente mais tarde. Transferência agendada: ID {}'.format(delivery_id)
+        available_region = get_stock_by_medication(medication_register, region_patient)
+        if available_region and available_region['quantity'] >= needed_quantity - available_quantity:
+            delivery_id = place_delivery_region(medication_request['region'], available_region['region'], stock['id'], available_region['id'], needed_quantity - available_quantity)
+            return 'Remedio indisponível, tente novamente mais tarde. Transferência agendada: ID {}'.format(delivery_id)
+        else:
+            return 'Remedio contido na receita não é oferecido ou não existe na quantidade adequada.'
     else:
-        return 'Remedio contido na receita não é oferecido ou não existe na quantidade adequada.'
+        return 'Bairro desconhecido.'
 
 mocked_prescription = {
     'id': '982c38fe-2250-4c7c-926a-fa08f9970907',
