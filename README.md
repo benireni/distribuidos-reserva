@@ -10,6 +10,7 @@ pip3 install kafka-python
 pip3 install git+https://github.com/dpkp/kafka-python.git
 
 ### Start Prometheus (keep it running in a terminal)
+curl https://github.com/prometheus/prometheus/releases/download/v2.53.0/prometheus-2.53.0.linux-amd64.tar.gz -o prometheus-2.53.0.linux-amd64.tar.gz
 tar -xvzf ./prometheus-2.53.0.linux-amd64.tar.gz
 cp prometheus.yml ./prometheus-2.53.0.linux-amd64
 cd ./prometheus-2.53.0.linux-amd64 && ./prometheus
@@ -27,6 +28,7 @@ brew services list
 mongosh < ./source/service/scripts/load_mongodb.js
 
 ### Enter Kafka's folder
+curl https://archive.apache.org/dist/kafka/3.5.0/kafka_2.12-3.5.0.tgz -o kafka_2.12-3.5.0.tgz
 tar -xvzf ./kafka_2.12-3.5.0.tgz
 cd kafka_2.12-3.5.0
 
